@@ -1,4 +1,4 @@
-# test-electron
+# startkit-cli
 
 > An electron-vue project
 
