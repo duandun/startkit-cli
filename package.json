@@ -1,6 +1,6 @@
 {
-  "name": "test-electron",
-  "productName": "test-electron",
+  "name": "startkit-cli",
+  "productName": "startkit-cli",
   "version": "0.0.0",
   "author": "changrui <changrui@didichuxing.com>",
   "description": "An electron-vue project",
