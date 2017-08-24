@@ -8,12 +8,16 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: 'standard',
+  extends: [
+    'standard',
+    'vue'
+  ],
   globals: {
     __static: true
   },
   plugins: [
-    'html'
+    'html',
+    'flowtype'
   ],
   'rules': {
     // allow paren-less arrow functions

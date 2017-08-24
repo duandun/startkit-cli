@@ -1,3 +1,7 @@
 test/unit/coverage/**
 test/unit/*.js
 test/e2e/*.js
+node_modules/*
+flow-typed/*
+dist/*
+static/*
