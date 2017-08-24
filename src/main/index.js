@@ -20,11 +20,12 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 580,
     useContentSize: true,
     width: 360,
     title: 'vue-startkit',
-    center: true
+    center: true,
+    titleBarStyle: 'hidden'
   })
 
   mainWindow.loadURL(winURL)
