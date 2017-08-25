@@ -1,14 +1,25 @@
-/**
- * The file enables `@/store/index.js` to import all vuex modules
- * in a one-shot manner. There should not be any reason to edit this file.
- */
-
+/* @flow */
 const files = require.context('.', false, /\.js$/)
 const modules = {}
 
+function getCamelCaseName (name) {
+  if (name.indexOf('-')) {
+    const _tempName = name.toLowerCase().split('-')
+    for (let i = 1; i < _tempName.length; i++) {
+      _tempName[i] = _tempName[i].substring(0, 1).toUpperCase() +
+      _tempName[i].substring(1)
+    }
+    return _tempName.join('')
+  } else {
+    return name
+  }
+}
+
 files.keys().forEach(key => {
   if (key === './index.js') return
-  modules[key.replace(/(\.\/|\.js)/g, '')] = files(key).default
+  const tmpKey = key.replace(/(\.\/|\.js)/g, '')
+  const camelCaseName = getCamelCaseName(tmpKey)
+  modules[camelCaseName] = files(key).default
 })
 
 export default modules

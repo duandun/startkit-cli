@@ -96,8 +96,6 @@ export default {
 </script>
 
 <style lang="less">
-  .create-wrapper {
-  }
   .cus-title {
     height: 20px;
     text-align: center;
