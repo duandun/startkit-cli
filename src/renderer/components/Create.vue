@@ -88,9 +88,9 @@ export default {
       'configFile'
     ]),
     createProject () {
-      // this.setDirAndClone({
-      //   formData: this.formData
-      // })
+      this.setDirAndClone({
+        formData: this.formData
+      })
       // this.configPackage()
       const context = {
         name: 'testName',
