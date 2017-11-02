@@ -54,3 +54,15 @@ export function isEmptyObject (obj: any) {
   for (var key in obj) if (obj.hasOwnProperty(key)) return false
   return true
 }
+
+// 包装 action dispatch 做异常的统一处理
+export const asyncFunc = (errorHandler: Function) => (dispatch: Function, action: string) => {
+  const func = async (args: any) => {
+    try {
+      return await dispatch(action, args)
+    } catch (err) {
+      errorHandler && errorHandler(err)
+    }
+  }
+  return func
+}

@@ -5,7 +5,7 @@
     </div>
     <div class="create-container">
       <Row style="margin-top: 20px;">
-        <Form ref="form" :model="formData" :label-width="120">
+        <Form ref="form" :model="formData" :label-width="120" :rules="rules">
             <Form-item label="vue-startkit 版本：" prop="">
                 <span>{{version}}</span>
             </Form-item>
@@ -29,9 +29,7 @@
                 </Checkbox-group>
             </Form-item>
             <Form-item label="图表：" prop="chart">
-                <Checkbox-group v-model="formData.chart">
-                    <Checkbox label="echarts"></Checkbox>
-                </Checkbox-group>
+                <Checkbox v-model="formData.chart">echarts</Checkbox>
             </Form-item>
             <Form-item label="ESLint：" prop="eslint">
                 <i-switch v-model="formData.eslint">
@@ -42,7 +40,7 @@
             <Form-item label="附加功能：" prop="funs">
                 <Checkbox-group v-model="formData.funs">
                     <Checkbox label="cookies">Cookie（js-cookie）</Checkbox>
-                    <Checkbox label="html2canvas">HTML 转图片（html2canvas）</Checkbox>
+                    <!-- <Checkbox label="html2canvas">HTML 转图片（html2canvas）</Checkbox> -->
                 </Checkbox-group>
             </Form-item>
             <Form-item label="项目名称：" prop="name">
@@ -51,15 +49,15 @@
             <Form-item label="版本号：" prop="ver">
                 <Input v-model="formData.ver" placeholder="请输入版本号，例如 1.0.0"></Input>
             </Form-item>
-            <Form-item label="项目介绍：" prop="desc">
+            <Form-item label="项目介绍：">
                 <Input type="textarea" v-model="formData.desc" placeholder="请输入项目介绍..."></Input>
             </Form-item>
-            <Form-item label="Git 地址：" prop="git">
+            <Form-item label="Git 地址：">
                 <Input v-model="formData.git" placeholder="请输入所在仓库地址"></Input>
             </Form-item>
             <Row type="flex" justify="center" style="margin-top: 20px;">
               <Col span="10">
-                <Button type="primary" long @click.native="createProj">创建工程</Button>
+                <Button type="primary" long @click.native="createProject">创建工程</Button>
               </Col>
               <Col span="10" offset="1">
                 <Button type="ghost" long @click.native="resetForm">重置</Button>
@@ -72,21 +70,34 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import * as Config from './config.js'
+
 export default {
   data () {
     return {
       version: '0.1.4',
-      formData: {
-
-      }
+      formData: Config.getFormData(),
+      rules: Config.getRules(this)
     }
   },
-  created () {
-
-  },
   methods: {
-    createProj () {
-      console.log('createProject')
+    ...mapActions([
+      'setDirAndClone',
+      'writeFile',
+      'configFile'
+    ]),
+    createProject () {
+      // this.setDirAndClone({
+      //   formData: this.formData
+      // })
+      // this.configPackage()
+      const context = {
+        name: 'testName',
+        ver: '0.1.0'
+      }
+      const fileDir = 'package.json'
+      this.configFile({ context, fileDir })
     },
     resetForm () {
       this.$refs.form.resetFields()
