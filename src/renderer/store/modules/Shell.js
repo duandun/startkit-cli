@@ -6,7 +6,7 @@ const { shell } = require('electron')
 const { dialog } = require('electron').remote
 const { exec } = require('child_process')
 const { asyncFunc } = require('@/util/base.js')
-const cloneUrl = 'git@git.xiaojukeji.com:efe/vue-startkit.git'
+const cloneUrl = ''
 
 const iAsyncFunc = asyncFunc(err => {
   console.log(`统一错误处理：${err}`)
